@@ -20,7 +20,6 @@ def generateVertexNormals(model):
     for face in model.faces:
         for vertex in face.toVertexTuple():
             vertex.n = vertex.calculateNormalizedAverageNormal()
-            print(vertex.n.toTuple())
 
 def renderFrame(model):
     glBegin(GL_LINES)
@@ -77,6 +76,7 @@ def main():
     prevtime = time.clock()
 
     translateOn = False
+    rotateOn = False
 
     while True:
         iteration+=1
@@ -88,19 +88,45 @@ def main():
                 pygame.quit()
                 quit()
 
-            if translateOn:
-                if event.type == pygame.MOUSEMOTION:
+
+            if event.type == pygame.MOUSEMOTION:
+                if rotateOn:
                     glRotate(1, event.rel[1], event.rel[0], 0)
+                if translateOn:
+                    glTranslate(event.rel[0]/100.0, 0 - event.rel[1]/100.0, 0)
 
             if event.type == pygame.MOUSEBUTTONUP:
-                translateOn = False
+
+                #Left Click Release
+                if event.button == 1:
+                    translateOn = False
+
+                #Right Click Release
+                if event.button == 3:
+                    rotateOn = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                translateOn = True
 
-        #glRotatef(1, 1, 1, .5)
+                #Left Click
+                if event.button == 1:
+                    translateOn = True
+                    rotateOn = False
+
+                #Right Click
+                if event.button == 3:
+                    rotateOn = True
+                    translateOn = False
+
+                #Zoom Out
+                if event.button == 4:
+                    glTranslate(0, 0, -.3)
+
+                #Zoom In
+                if event.button == 5:
+                    glTranslate(0, 0, .3)
+
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-        #renderBasic(MyModel)
+        renderBasic(MyModel)
         renderFrame(MyModel)
         pygame.display.flip()
 
