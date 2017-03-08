@@ -28,9 +28,9 @@ def load(filename):
 	faces = []
 	f_info = line.split()
 	f = Face(
-		vertices[int(f_info[1]) - 1],
-		vertices[int(f_info[2]) - 1],
-		vertices[int(f_info[3]) - 1]
+			vertices[int(f_info[1]) - 1],
+			vertices[int(f_info[2]) - 1],
+			vertices[int(f_info[3]) - 1]
 		)
 	faces.append(f)
 	print(f_info)
