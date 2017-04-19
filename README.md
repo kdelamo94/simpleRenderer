@@ -1,6 +1,6 @@
-#simpleRenderer
+# simpleRenderer
 
-##Installation and Dependencies
+## Installation and Dependencies
 
 This project depends on both PyGame and PyOpenGL meaning these need to be
 installed in order for the test.py script to run as expected.
