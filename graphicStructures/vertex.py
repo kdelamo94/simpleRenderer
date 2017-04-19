@@ -1,5 +1,5 @@
 import numpy as np
-from vector import Vector
+from graphicStructures.vector import Vector
 
 
 class Vertex:

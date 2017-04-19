@@ -1,5 +1,5 @@
 import numpy as np
-from vector import Vector
+from graphicStructures.vector import Vector
 class Face:
 
 	def __init__(self, v1, v2, v3):

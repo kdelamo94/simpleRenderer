@@ -32,6 +32,7 @@ def renderFrame(model):
             glVertex3fv(vertices[(idx + 1)%len(vertices)].toTuple())
     glEnd()
 def renderBasic(model):
+
     glBegin(GL_TRIANGLES)
 
     for face in model.faces:
@@ -83,6 +84,7 @@ def main():
         #print((prevtime - time.clock()))
         prevtime = time.clock()
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 print(glGetString(GL_VERSION))
                 pygame.quit()
@@ -90,10 +92,14 @@ def main():
 
 
             if event.type == pygame.MOUSEMOTION:
+
+                #Use Mouse to rotate object
                 if rotateOn:
-                    glRotate(1, event.rel[1], event.rel[0], 0)
+                    glRotatef(1, event.rel[1], event.rel[0], 0)
+
+                #Use Mouse to translate object
                 if translateOn:
-                    glTranslate(event.rel[0]/100.0, 0 - event.rel[1]/100.0, 0)
+                    glTranslatef(event.rel[0]/100.0, 0 - event.rel[1]/100.0, 0)
 
             if event.type == pygame.MOUSEBUTTONUP:
 
@@ -119,15 +125,15 @@ def main():
 
                 #Zoom Out
                 if event.button == 4:
-                    glTranslate(0, 0, -.3)
+                    glTranslatef(0, 0, -.3)
 
                 #Zoom In
                 if event.button == 5:
-                    glTranslate(0, 0, .3)
+                    glTranslatef(0, 0, .3)
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         renderBasic(MyModel)
-        renderFrame(MyModel)
+        #renderFrame(MyModel)
         pygame.display.flip()
 
 main()
